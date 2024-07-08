@@ -15,7 +15,7 @@ class Pages
   public:
     Pages();
     const String menu = <<<MENUHTML>>>;
-    const String referee = <<<REFEREEHTML>>>
+    const String referee = <<<REFEREEHTML>>>;
 };
 
 Pages::Pages()
