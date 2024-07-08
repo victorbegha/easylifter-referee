@@ -1,0 +1,286 @@
+<!--
+EasyLifter Referee - Free referee lights and timing system for powerlifting
+Copyright (C) 2024  Victor Begha
+Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:image/x-icon;base64,<<BASE64ICON>>" />
+    <title>EasyLifter Referee</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #2c2c2c;
+        font-family: Verdana;
+        color: white;
+      }
+      .container {
+        width: 90vw;
+        max-width: 400px;
+        padding: 10px;
+      }
+      h2 {
+        text-align: center;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .row.single-button {
+        justify-content: flex-start;
+      }
+      :root {
+        --button-size: 28%; /* Ensure all buttons are the same size */
+        --double-button-size: 45%; /* Size for buttons in the two-button row */
+      }
+      .color-button {
+        width: var(--button-size);
+        padding-bottom: var(--button-size); /* Maintain square shape */
+        border: none;
+        font-size: 24px;
+        text-align: center;
+        border-radius: 15%;
+        cursor: pointer;
+        position: relative;
+        background-color: #007bff; /* Default blue background */
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        color: transparent; /* Hide text by default */
+      }
+      .color-button span {
+        margin-top: 100%;
+        position: absolute;
+        display: inline;
+        color: inherit; /* Text color for checkmark */
+      }
+      .color-button.pressed {
+        opacity: 0.8; /* Slight transparency for the pressed state */
+      }
+      .single-button button {
+        background-color: #ffffff; /* White background for the first row button */
+        color: transparent; /* Hide text by default */
+      }
+      #red {
+        background-color: #ff0000; /* Red button */
+      }
+      #blue {
+        background-color: #0000ff; /* Blue button */
+      }
+      #yellow {
+        background-color: #ffff00; /* Yellow button */
+        color: transparent; /* Hide text by default */
+      }
+      .row.double-button button {
+        width: var(--double-button-size);
+        color: white;
+      }
+      .color-button.pressed span {
+        color: #fff; /* Show text when pressed */
+      }
+      #white.pressed span {
+        color: #000; /* Show black checkmark text when pressed on white button */
+      }
+      #yellow.pressed span {
+        color: #000; /* Show black checkmark text when pressed on yellow button */
+      }
+      .text-row {
+        display: block;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .menu-button {
+        padding-bottom: 10px;
+        padding-top: 10px;
+        background-color: grey;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        border-radius: 5% / 30%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <br /><br />
+      <h2 id="title">Referee</h2>
+      <span id="debugState"></span>
+      <br /><br />
+      <div class="row single-button">
+        <button class="color-button" id="white" onclick="pressButton('w')">
+          <span>&#10003;</span>
+        </button>
+      </div>
+      <div class="row">
+        <button class="color-button" id="red" onclick="pressButton('r')">
+          <span>&#10003;</span>
+        </button>
+        <button class="color-button" id="blue" onclick="pressButton('b')">
+          <span>&#10003;</span>
+        </button>
+        <button class="color-button" id="yellow" onclick="pressButton('y')">
+          <span>&#10003;</span>
+        </button>
+      </div>
+      <br />
+      <div class="row double-button">
+        <button class="menu-button" onclick="pressButton('clear')">
+          <span>Clear</span>
+        </button>
+      </div>
+      <div id="timerControl" style="display: none">
+        <hr />
+        <div class="row double-button" style="text-align: center">
+          <button class="menu-button" onclick="setTimer(60000)" style="margin-left: auto; margin-right: auto; background-color: #2277ab">
+            <span>Start 1min</span>
+          </button>
+        </div>
+        <div class="row double-button" style="text-align: center">
+          <button class="menu-button" onclick="setTimer(120000)" style="margin-left: auto; margin-right: 2px">
+            <span>2min</span>
+          </button>
+          <button class="menu-button" onclick="setTimer(180000)" style="margin-left: 2px; margin-right: 2px">
+            <span>3min</span>
+          </button>
+          <button class="menu-button" onclick="setTimer(240000)" style="margin-left: 2px; margin-right: auto">
+            <span>4min</span>
+          </button>
+        </div>
+      </div>
+      <hr />
+      <div class="text-row">
+        <h3>Status: <span id="connectionStatusText">Connecting...</span></h3>
+      </div>
+      <div class="row double-button">
+        <button class="menu-button" onclick="reconnect()">
+          <span>Reconnect</span>
+        </button>
+        <button class="menu-button" onclick="window.location.href = '/'">
+          <span>Exit</span>
+        </button>
+      </div>
+      <div class="text-row">
+        <h5>EasyLifter Referee - by Victor Begha</h5>
+      </div>
+    </div>
+    <script>
+      /* Keep comments wrapped like this OR update the minifier to handle single line comments */
+
+      const urlParams = new URLSearchParams(window.location.search);
+      var position = urlParams.get('position')[0];
+      if (!position) {
+        window.location.href = '/'; /* If position is not defined, go to the menu for selection */
+      }
+
+      if (position === 'c') {
+        document.getElementById('timerControl').style.display = 'block';
+      }
+
+      var connectedStatus = false;
+
+      getTitle = function () {
+        let title = 'Referee: ';
+        switch (position) {
+          case 'l': {
+            title += 'Left side';
+            break;
+          }
+          case 'c': {
+            title += 'Center';
+            break;
+          }
+          case 'r': {
+            title += 'Right side';
+            break;
+          }
+        }
+        return title;
+      };
+
+      document.addEventListener('DOMContentLoaded', function (event) {
+        document.getElementById('title').innerHTML = getTitle(position);
+      });
+
+      var myDecision = ['0', '0', '0', '0'];
+
+      function pressButton(button) {
+        websocket.send(position + button);
+      }
+
+      function setTimer(millis) {
+        websocket.send('t' + millis);
+      }
+
+      var gateway = 'ws://192.168.4.1/ws';
+      var websocket;
+      window.addEventListener('load', onLoad);
+      function initWebSocket() {
+        console.log('Trying to connect to WS');
+        websocket = new WebSocket(gateway);
+        websocket.onopen = onOpen;
+        websocket.onclose = onClose;
+        websocket.onmessage = onMessage;
+      }
+      function onOpen(event) {
+        console.log('WS connection open');
+      }
+      function onClose(event) {
+        console.log('WS connection closed');
+        setTimeout(initWebSocket, 2000);
+      }
+      function onMessage(event) {
+        let results = event.data;
+        let myResults = results.substring(results.indexOf(position) + 1, results.indexOf(position) + 5);
+        setButtonClasses(myResults);
+      }
+
+      function setButtonClasses(myResults) {
+        setButtonState('white', myResults[0]);
+        setButtonState('red', myResults[1]);
+        setButtonState('blue', myResults[2]);
+        setButtonState('yellow', myResults[3]);
+      }
+      function setButtonState(id, singleResult) {
+        if (singleResult === '1') {
+          document.getElementById(id).classList.add('pressed');
+        } else {
+          document.getElementById(id).classList.remove('pressed');
+        }
+      }
+
+      function checkConnection() {
+        if (websocket.readyState === 1) {
+          /* open */
+          connectedStatus = true;
+        } else {
+          /* 0 = connecting, 2 = closing, 3 = closed */
+          connectedStatus = false;
+        }
+
+        document.getElementById('connectionStatusText').innerHTML = connectedStatus ? 'Connected' : 'Disconnected';
+        document.getElementById('connectionStatusText').style.color = connectedStatus ? 'green' : 'red';
+      }
+
+      function reconnect() {
+        if (confirm('Before continuing, make sure the device is connected to the "REFEREES" WiFi network. Try to reconnect?')) {
+          location.reload();
+        }
+      }
+
+      function onLoad(event) {
+        initWebSocket();
+
+        window.setInterval(checkConnection, 500);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!--
+EasyLifter Referee - Free referee lights and timing system for powerlifting
+Copyright (C) 2024  Victor Begha
+Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer - EasyLifter Referee</title>
+    <link href="assets/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/all.css" rel="stylesheet" />
+    <link href="assets/dashboard.css" rel="stylesheet" />
+
+    <script src="assets/fontawesome.js"></script>
+  </head>
+  <body>
+    <br />
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-lg-8">
+          <div class="input-group mb-3">
+            <input id="timerInput" class="form-control" oninput="mascara(this)" onclick="clearInput(this)" onblur="validateTimer(this)" type="text" value="01:00" placeholder="00:00" />
+            <div class="input-group-append">
+              <button id="playButton" onclick="timer.playTimer()" class="btn btn-light" type="button">
+                <i class="fas fa-play"></i>
+              </button>
+              <button id="pauseButton" onclick="timer.pauseTimer()" class="btn btn-light hidden" type="button">
+                <i class="fas fa-pause"></i>
+              </button>
+              <button id="stopButton" onclick="timer.stopTimer()" class="btn btn-light hidden" type="button">
+                <i class="fas fa-rotate-left"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-lg-4">
+          <span id="timer"></span>
+          <span id="timerStatusStopped" class="hidden"><i class="fas fa-stop"></i></span>
+          <span id="timerStatusRunning" class="hidden"><i class="fas fa-play"></i></span>
+          <span id="timerStatusPaused" class="hidden"><i class="fas fa-pause"></i></span>
+          <span id="timerStatusExpired" class="hidden"><i class="fas fa-circle-exclamation"></i></span>
+        </div>
+      </div>
+    </div>
+
+    <script src="./miniTimerRenderer.js"></script>
+    <script src="./timerInputFormatter.js"></script>
+  </body>
+</html>

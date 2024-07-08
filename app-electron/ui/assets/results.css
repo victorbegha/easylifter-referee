@@ -1,0 +1,83 @@
+/*
+EasyLifter Referee - Free referee lights and timing system for powerlifting
+Copyright (C) 2024  Victor Begha
+Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
+*/
+
+body {
+    font-family: 'RobotoBlackLocal', Roboto-Black, Roboto, monospace, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #101010;
+    color: #fff;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+.circle-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+.large-circle {
+    width: 22%;
+    padding-top: 22%;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    border: 1px solid transparent;
+}
+
+.pending-result {
+    border: 1px solid white !important;
+}
+.valid-result {
+    background-color: #fff;
+}
+.invalid-result {
+    background-color: red;
+}
+
+.small-circle-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    position: absolute;
+    bottom: -25%;
+}
+.small-circle {
+    width: 20%;
+    padding-top: 20%;
+    border-radius: 50%;
+    margin: 0 5%;
+}
+.invisible {
+    background-color: transparent !important;
+}
+.red { background-color: red; }
+.blue { background-color: blue; }
+.yellow { background-color: yellow; }
+
+
+.half-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    
+    margin-top: 150px;
+}
+.one-half {
+    width: 40%;
+    font-size: 15vw; /* TODO: if SHOW_MILLISECONDS, use 10vw */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}

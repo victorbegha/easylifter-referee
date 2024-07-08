@@ -1,0 +1,42 @@
+/*
+EasyLifter Referee - Free referee lights and timing system for powerlifting
+Copyright (C) 2024  Victor Begha
+Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
+*/
+
+/* Font is included in the project since it may not be installed on all computers */
+@font-face {
+    font-family: 'RobotoBlackLocal';
+    src: url('../assets/Roboto-Black.ttf');
+}
+
+/* Disable highlighting/selecting text across the app */
+:not(input):not(textarea),
+:not(input):not(textarea)::after,
+:not(input):not(textarea)::before {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Better looking scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f100;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(95, 95, 95);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+
+.hidden {
+    display: none
+}

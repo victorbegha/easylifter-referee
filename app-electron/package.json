@@ -1,0 +1,33 @@
+{
+  "name": "easylifter-referee",
+  "version": "1.0.0",
+  "description": "Free referee lights and timing system for powerlifting",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/victorbegha/easylifter-referee"
+  },
+  "keywords": [
+    "powerlifting",
+    "weightlifting",
+    "referee",
+    "timer",
+    "competition",
+    "sports"
+  ],
+  "author": "Victor Begha",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "electron": "30.0.0"
+  },
+  "dependencies": {
+    "serialport": "10.5.0"
+  },
+  "engines": {
+    "node": "18.16.1",
+    "npm": "9.5.1"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "inoCodeGenerator",
+  "version": "1.0.0",
+  "description": "Generate .ino with credentials and create pages.h from HTML files, ready to be used in the ESP32 web server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Victor Begha",
+  "license": "GPL-3.0"
+}

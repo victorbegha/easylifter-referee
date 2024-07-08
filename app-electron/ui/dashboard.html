@@ -1,0 +1,239 @@
+<!--
+EasyLifter Referee - Free referee lights and timing system for powerlifting
+Copyright (C) 2024  Victor Begha
+Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - EasyLifter Referee</title>
+    <link href="assets/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/all.css" rel="stylesheet" />
+    <link href="assets/dashboard.css" rel="stylesheet" />
+
+    <script src="assets/bootstrap.bundle.min.js"></script>
+    <script src="assets/fontawesome.js"></script>
+  </head>
+  <body>
+    <br />
+    <div class="container px-4 px-lg-8 text-center">
+      <div class="row gx-4 gx-lg-8 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-10">
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-lg-6">
+              <div class="card text-center">
+                <img class="card-img-top" src="assets/BannerApp.png" />
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-lg-6" style="min-height: 100%">
+              <div class="card text-center" id="connectionStatusCard">
+                <span style="font-size: 1.5rem">
+                  <i class="fa-brands fa-usb"></i>
+                </span>
+                <span id="strRouterDisconnected">Router Disconnected</span>
+                <span id="strRouterConnected" class="hidden">Router Connected</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-lg-12">
+          <ul class="nav nav-tabs nav-fill">
+            <li class="nav-item">
+              <a class="nav-link active" href="#" onclick="setActiveTab(this, 'dashboard')"><span id="strNavDashboard">Dashboard</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="setActiveTab(this, 'connection')"><span id="strNavConnection">Referee Connection</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="setActiveTab(this, 'settings')"><span id="strNavSettings">Settings</span></a>
+            </li>
+            <!--
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="setActiveTab(this, 'help')"><span id="strNavHelp">Help</span></a>
+            </li>
+            -->
+          </ul>
+        </div>
+        <!-- Dashboard panel -->
+        <div id="panel-dashboard" class="col-sm-12 col-lg-12 panel-content">
+          <div class="row">
+            <div class="col-12">
+              <div class="card text-center">
+                <div class="container">
+                  <div class="row">
+                    <h5>
+                      <span id="strTimerTitle">Timer</span>
+                      <small>
+                        <span class="btn-group" style="margin-left: 40px">
+                          <button onclick="separateTimerWindow()" class="btn btn-mini btn-light">
+                            <span id="strTimerOpenSeparate">Open in new window</span>
+                          </button>
+                        </span>
+                      </small>
+                    </h5>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-lg-8">
+                      <div class="input-group mb-3">
+                        <input id="timerInput" class="form-control" oninput="mascara(this)" onclick="clearInput(this)" onblur="validateTimer(this)" type="text" value="01:00" placeholder="00:00" />
+                        <div class="input-group-append">
+                          <button id="playButton" onclick="timer.playTimer()" class="btn btn-light" type="button">
+                            <i class="fas fa-play"></i>
+                          </button>
+                          <button id="pauseButton" onclick="timer.pauseTimer()" class="btn btn-light hidden" type="button">
+                            <i class="fas fa-pause"></i>
+                          </button>
+                          <button id="stopButton" onclick="timer.stopTimer()" class="btn btn-light hidden" type="button">
+                            <i class="fas fa-rotate-left"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-lg-4">
+                      <span id="timer"></span>
+                      <span id="timerStatusStopped" class="hidden"><i class="fas fa-stop"></i></span>
+                      <span id="timerStatusRunning" class="hidden"><i class="fas fa-play"></i></span>
+                      <span id="timerStatusPaused" class="hidden"><i class="fas fa-pause"></i></span>
+                      <span id="timerStatusExpired" class="hidden"><i class="fas fa-circle-exclamation"></i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" id="displayOptions">
+            <div class="col-xs-6 col-sm-6 col-lg-6">
+              <div class="card text-center">
+                <button class="btn btn-light" onclick="setFullScreen()">
+                  <span id="strToggleFullScreen">Toggle fullscreen</span>
+                </button>
+                <button class="btn btn-light" onclick="showHideTimer()">
+                  <span id="strToggleTimer">Show / hide timer</span>
+                </button>
+                <button class="btn btn-light" onclick="showHideAttempts()">
+                  <span id="strToggleAttempts">Show / hide next attempts</span>
+                </button>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-lg-6">
+              <div id="attemptChangesCard" class="card text-center">
+                <span id="strNextAttemptTitle">Time to inform next attempt:</span>
+                <span id="attemptChanges"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Connection panel -->
+        <div id="panel-connection" class="col-sm-12 col-lg-12 panel-content hidden">
+          <div class="row">
+            <div class="col-12">
+              <div class="card text-center">
+                <p>
+                  <span id="strNetworkIntro">Before connecting a referee's phone to the system, ensure the router is on and connected to the computer.</span>
+                </p>
+                <div id="networkWarning">
+                  <p><span id="strNetworkWarning">To get connection instructions, connect the router to the computer.</span></p>
+                </div>
+                <div id="networkInstructions" class="hidden">
+                  <p>
+                    <span id="strNetworkWifi">1. In the phone, connect to the system's WiFi network:</span>
+                  </p>
+                  <div class="row">
+                    <div class="col-6 offset-3">
+                      <div class="input-group mb-3">
+                        <span id="strNetworkSsidLabel" class="input-group-text">Network:</span>
+                        <input readonly class="form-control" id="ssid" value="REFEREES" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6 offset-3">
+                      <div class="input-group mb-3">
+                        <span id="strNetworkPasswordLabel" class="input-group-text">Password:</span>
+                        <input readonly class="form-control" id="password" type="password" value="password" />
+                        <span class="input-group-text" style="cursor: pointer" onclick="togglePassword()">
+                          <i class="fa fa-eye"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <p>
+                    <span id="strNetworkStayConnected">2. Since this is a local network, a message like "This network has no internet access, remain connected?" will appear. Choose YES to stay connected. To avoid issues, disable the phone's mobile data usage (4g/5g).</span>
+                  </p>
+                  <p>
+                    <span id="strNetworkAddress1">3. Type, in the internet browser, the address "http://easylifter.local/" or</span>
+                    <span id="ipAddress">"http://192.168.4.1"</span>
+                    <span id="strNetworkAddress2">to access the system.</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Settings panel -->
+        <div id="panel-settings" class="col-sm-12 col-lg-12 panel-content hidden">
+          <div class="row">
+            <div class="col-12">
+              <div class="card text-center">
+                <br />
+                <h5 id="strLanguageTitle">Language</h5>
+                <div class="row">
+                  <div class="offset-2 col-8">
+                    <div class="btn-group" role="group" id="languageSettingsGroup">
+                      <input type="radio" class="btn-check" name="langradio" id="langradioen-us" value="en-us" />
+                      <label class="btn btn-outline-primary" for="langradioen-us">English</label>
+
+                      <input type="radio" class="btn-check" name="langradio" id="langradiopt-br" value="pt-br" />
+                      <label class="btn btn-outline-primary" for="langradiopt-br">Português</label>
+                    </div>
+                    <br /><br /><br />
+                    <button class="btn btn-light" onclick="saveSettingsRestart()">
+                      <span id="strSaveSettings">Save settings and restart app</span>
+                    </button>
+                    <br /><br /><br />
+
+                    <button class="btn" onclick="showAdvancedOptions()">
+                      <span id="strAdvancedOptions">Show advanced options</span>
+                    </button>
+                    <div id="advancedOptions" class="hidden">
+                      <button class="btn btn-light" onclick="showDemo(true)"><span id="strShowDemoValid">Demo (valid)</span></button>
+                      <br />
+                      <button class="btn btn-light" onclick="showDemo(false)"><span id="strShowDemoInvalid">Demo (invalid)</span></button>
+                      <br />
+                      <button class="btn btn-light" onclick="setAttemptChangeTimer()"><span id="strSetAttemptChange">New attempt change</span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Help panel -->
+        <div id="panel-help" class="col-sm-12 col-lg-12 panel-content hidden">
+          <div class="row">
+            <div class="col-12">
+              <div class="card text-center">
+                <br />
+                <h5>Help</h5>
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End of panels -->
+      </div>
+    </div>
+
+    <script src="./dashboardRenderer.js"></script>
+    <script src="./tabsControl.js"></script>
+    <script src="./timerInputFormatter.js"></script>
+  </body>
+</html>

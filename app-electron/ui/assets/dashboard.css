@@ -1,0 +1,106 @@
+/*
+EasyLifter Referee - Free referee lights and timing system for powerlifting
+Copyright (C) 2024  Victor Begha
+Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
+*/
+
+body {
+  font-family: 'RobotoBlackLocal', Roboto-Black, Roboto, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #28272a;
+  color: #fff;
+}
+
+.card {
+  background-color: #4c4a4f;
+}
+
+.nav-link {
+  color: #dbdbdb;
+}
+
+.active {
+  background-color: #4c4a4f !important;
+  color: #dbdbdb !important;
+  border-color: #dbdbdb !important;
+}
+
+.panel-content {
+  margin-bottom: 10px;
+}
+
+.panel-content .row {
+  margin-top: 10px;
+}
+
+.panel-content .card {
+  background-color: #3a383c !important;
+  padding: 10px;
+  height: 100%;
+  color: #dbdbdb;
+}
+
+#attemptChangesCard {
+  font-size: 1.2rem;
+  color: #dbdbdb;
+}
+
+#attemptChanges {
+  font-size: 1.6rem;
+  color: #dbdbdb;
+  text-align: right;
+}
+
+.nav-link:hover {
+  color: inherit
+}
+
+
+
+input {
+  margin-right: 5px;
+}
+
+
+#timer {
+  font-size: 2rem;
+}
+
+#timerStatusStopped {
+  font-size: 2rem;
+  color: #c73c00;
+  margin-left: 5px;
+}
+
+#timerStatusRunning {
+  font-size: 2rem;
+  color: green;
+  margin-left: 5px;
+}
+
+#timerStatusPaused {
+  font-size: 2rem;
+  color: yellow;
+  margin-left: 5px;
+}
+
+#timerStatusExpired {
+  font-size: 2rem;
+  color: #c70000;
+  margin-left: 5px;
+}
+
+
+#connectionStatusCard {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  height: 100%;
+  color: #E41F1F;
+  font-size: 1.2rem
+}
+
+
+#displayOptions button {
+  margin-bottom: 10px;
+}
