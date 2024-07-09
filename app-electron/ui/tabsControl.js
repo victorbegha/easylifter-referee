@@ -8,4 +8,10 @@ function setActiveTab(tab, option) {
     el.classList.remove('active');
   });
   tab.classList.add('active');
+
+  // Auto hides the network password on the Network Connection tab if changing to another tab
+  try {
+    togglePassword(true);
+  }
+  catch (e) {}
 }

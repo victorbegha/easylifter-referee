@@ -63,12 +63,12 @@ ipcRenderer.on('networkInfo', function (event, ipAddress, ssid, password) {
   document.getElementById('networkInstructions').classList.remove('hidden');
 });
 
-function togglePassword() {
+function togglePassword(forceHide) {
   let element = document.getElementById('password');
-  if (element.type === 'password') {
-    element.type = 'text';
-  } else {
+  if (element.type === 'text' || forceHide) {
     element.type = 'password';
+  } else {
+    element.type = 'text';
   }
 }
 

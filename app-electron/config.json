@@ -1,5 +1,5 @@
 {
-  "language": "pt-br",
+  "language": "en-us",
   "useSpecificComPort": false,
   "specificComPort": "COM6",
   "ruleset": "ipf",

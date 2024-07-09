@@ -19,7 +19,7 @@ function getConfigFromFile() {
   let filePath = './config.json';
   // This is a temporary solution to read/write to the config file after building, will later change to relative paths
   if (!fs.existsSync(filePath)) {
-    filePath = './resources/app/config.json'
+    filePath = './resources/app/config.json';
   }
   let rawData = fs.readFileSync(filePath);
   return JSON.parse(rawData);
@@ -29,12 +29,12 @@ function setConfig(newConfig) {
   let filePath = './config.json';
   // This is a temporary solution to read/write to the config file after building, will later change to relative paths
   if (!fs.existsSync(filePath)) {
-    filePath = './resources/app/config.json'
+    filePath = './resources/app/config.json';
   }
   fs.writeFileSync(filePath, JSON.stringify(newConfig, null, 2));
 }
 
-ipcMain.handle("getConfig", () => config);
+ipcMain.handle('getConfig', () => config);
 
 ipcMain.on('setConfigAndRestart', (event, config) => {
   setConfig(config);
@@ -473,7 +473,9 @@ function createMiniTimerWindow() {
   miniTimerWindow.minimizable = false;
   miniTimerWindow.maximizable = false;
 
-  miniTimerWindow.webContents.send('updateTimerStatus', currentTimerStatus);
+  setTimeout(() => {
+    miniTimerWindow.webContents.send('updateTimerStatus', currentTimerStatus);
+  }, 500);
 
   miniTimerWindow.on('close', () => {
     miniTimerWindow = null;
