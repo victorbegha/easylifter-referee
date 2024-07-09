@@ -93,6 +93,10 @@ function showAdvancedOptions() {
   }
 }
 
+function openExternalLink(url) {
+  ipcRenderer.send('openExternalLink', url);
+}
+
 /* --- DEBUG FUNCTIONS --- */
 
 function showDemo(valid) {

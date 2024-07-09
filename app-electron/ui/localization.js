@@ -16,6 +16,7 @@ const localizationStrings = {
     strNavConnection: 'Referee Connection',
     strNavSettings: 'Settings',
     strNavHelp: 'Help',
+    strNavAbout: 'About',
     strTimerTitle: 'Timer',
     strTimerOpenSeparate: 'Open in new window',
     strToggleFullScreen: 'Toggle fullscreen',
@@ -23,7 +24,7 @@ const localizationStrings = {
     strToggleAttempts: 'Show / hide next attempts',
     strNextAttemptTitle: 'Time to inform next attempt:',
 
-    strNetworkIntro: 'Before connecting a referee\'s phone to the system, ensure the EasyLifter router is on and connected to the computer.',
+    strNetworkIntro: 'Before connecting a referee\'s phone to the system, ensure the EasyLifter router is connected to the computer\'s USB port.',
     strNetworkWarning: 'To get connection instructions, connect the EasyLifter router to the computer.',
     strNetworkWifi: '1. In the phone, connect to the system\'s WiFi network:',
     strNetworkSsidLabel: 'Network:',
@@ -37,7 +38,15 @@ const localizationStrings = {
     strAdvancedOptions: 'Show advanced options',
     strShowDemoValid: 'Demo (valid)',
     strShowDemoInvalid: 'Demo (invalid)',
-    strSetAttemptChange: 'New attempt change'
+    strSetAttemptChange: 'New attempt change',
+
+    strVersion: 'Version',
+    strAboutDescription: 'EasyLifter Referee is a free, open source software licenced under the GNU General Public License v3.',
+    strGithubProject: 'Learn more on the project\'s GitHub page.',
+    strAboutAuthor: 'Author',
+    strAboutThanks: 'Special thanks',
+    strAboutNirvana1: 'Nirvana Barbell powerlifting team',
+    strAboutNirvana2: '- for encouraging the development of this project and helping test it.'
   },
   'pt-br': {
     dashboardWindowTitle: 'Painel',
@@ -50,6 +59,7 @@ const localizationStrings = {
     strNavConnection: 'Conexão Árbitros',
     strNavSettings: 'Configurações',
     strNavHelp: 'Ajuda',
+    strNavAbout: 'Sobre',
     strTimerTitle: 'Timer',
     strTimerOpenSeparate: 'Abrir em janela separada',
     strToggleFullScreen: 'Ativar / desativar tela cheia',
@@ -57,7 +67,7 @@ const localizationStrings = {
     strToggleAttempts: 'Mostrar / ocultar próximas pedidas',
     strNextAttemptTitle: 'Tempo para informar próxima pedida:',
 
-    strNetworkIntro: 'Antes de conectar o celular de um árbitro ao sistema, verifique que o roteador EasyLifter está ligado e conectado ao computador.',
+    strNetworkIntro: 'Antes de conectar o celular de um árbitro ao sistema, verifique que o roteador EasyLifter está conectado à porta USB do computador.',
     strNetworkWarning: 'Para obter as instruções de conexão, conecte o roteador EasyLifter ao computador.',
     strNetworkWifi: '1. No celular, conecte à rede WiFi do sistema:',
     strNetworkSsidLabel: 'Rede:',
@@ -66,13 +76,20 @@ const localizationStrings = {
     strNetworkAddress1: '3. Digite, pelo navegador de internet, o endereço "http://easylifter.local/" ou',
     strNetworkAddress2: 'para acessar o sistema.',
 
-
     strLanguageTitle: 'Idioma',
     strSaveSettings: 'Salvar configurações e reiniciar aplicação',
     strAdvancedOptions: 'Mostrar opções avançadas',
     strShowDemoValid: 'Demo (válido)',
     strShowDemoInvalid: 'Demo (inválido)',
-    strSetAttemptChange: 'Nova entrega de pedida'
+    strSetAttemptChange: 'Nova entrega de pedida',
+
+    strVersion: 'Versão',
+    strAboutDescription: 'EasyLifter Referee é um software gratuito e de código aberto, licenciado sob a GNU General Public License v3.',
+    strGithubProject: 'Conheça mais na página GitHub do projeto.',
+    strAboutAuthor: 'Autor',
+    strAboutThanks: 'Agradecimentos',
+    strAboutNirvana1: 'Nirvana Barbell equipe de powerlifting',
+    strAboutNirvana2: '- por incentivar o desenvolvimento deste projeto e ajudar a testá-lo.'
   },
 };
 

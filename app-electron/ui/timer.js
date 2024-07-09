@@ -44,7 +44,6 @@ function getTimerInputInMillis() {
   
   function updateTimerStatus(status) {
     timerStatus = status;
-    console.log("new status" + status);
     switch (timerStatus) {
       case TIMER_STATUSES.STOPPED:
         document.getElementById("playButton").classList.remove("hidden");

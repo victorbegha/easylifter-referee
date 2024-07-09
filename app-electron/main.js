@@ -4,7 +4,7 @@ Copyright (C) 2024  Victor Begha
 Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
 */
 
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, shell } = require('electron');
 const { SerialPort } = require('serialport');
 const path = require('path');
 const url = require('url');
@@ -439,6 +439,14 @@ function setNetworkConnectionInfo(message) {
   let password = parts[3];
   dashboardWindow.webContents.send('networkInfo', ipAddress, ssid, password);
 }
+
+function openExternalLink(url) {
+  shell.openExternal(url);
+}
+
+ipcMain.on('openExternalLink', (event, url) => {
+  openExternalLink(url);
+});
 
 /* --- MINI TIMER WINDOW --- */
 

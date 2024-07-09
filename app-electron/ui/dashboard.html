@@ -55,6 +55,9 @@ Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="setActiveTab(this, 'settings')"><span id="strNavSettings">Settings</span></a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="setActiveTab(this, 'about')"><span id="strNavAbout">About</span></a>
+            </li>
             <!--
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="setActiveTab(this, 'help')"><span id="strNavHelp">Help</span></a>
@@ -137,7 +140,7 @@ Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
             <div class="col-12">
               <div class="card text-center">
                 <p>
-                  <span id="strNetworkIntro">Before connecting a referee's phone to the system, ensure the router is on and connected to the computer.</span>
+                  <span id="strNetworkIntro">Before connecting a referee's phone to the system, ensure the router is connected to the computer's USB port.</span>
                 </p>
                 <div id="networkWarning">
                   <p><span id="strNetworkWarning">To get connection instructions, connect the router to the computer.</span></p>
@@ -212,6 +215,37 @@ Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- About panel -->
+        <div id="panel-about" class="col-sm-12 col-lg-12 panel-content hidden">
+          <div class="row">
+            <div class="col-12">
+              <div class="card text-center">
+                <h5>
+                  EasyLifter Referee - <span id="strVersion">Version</span> 1.0.0
+                </h5>
+                <p>
+                  <span id="strAboutDescription">EasyLifter Referee is a free, open source software licenced under the GNU General Public License v3.</span>
+                  <a href="javascript:void(0)" onclick="openExternalLink('https:\/\/github.com/victorbegha/easylifter-referee')">
+                    <span id="strGithubProject">Learn more on the project's GitHub page.</span>
+                  </a>
+                </p>
+                <h5 id="strAboutAuthor">Author</h5>
+                <p>
+                  Victor Begha -
+                  <a href="javascript:void(0)" onclick="openExternalLink('https:\/\/github.com/victorbegha/')">GitHub</a> |
+                  <a href="#" onclick="openExternalLink('https:\/\/www.linkedin.com/in/victor-begha-5b385511a/')">LinkedIn</a>
+                </p>
+                <h5 id="strAboutThanks">Special thanks</h5>
+                <p>
+                  <a href="javascript:void(0)" onclick="openExternalLink('https:\/\/www.instagram.com/nirvanabarbell/')">
+                    <span id="strAboutNirvana1">Nirvana Barbell powerlifting team</span>
+                  </a>
+                  <span id="strAboutNirvana2">- for encouraging the development of this project and helping test it</span>
+                </p>
               </div>
             </div>
           </div>
