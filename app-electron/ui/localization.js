@@ -46,7 +46,7 @@ const localizationStrings = {
     strAboutAuthor: 'Author',
     strAboutThanks: 'Special thanks',
     strAboutNirvana1: 'Nirvana Barbell powerlifting team',
-    strAboutNirvana2: '- for encouraging the development of this project and helping test it.'
+    strAboutNirvana2: ' - for helping test this project and providing valuable feedback.'
   },
   'pt-br': {
     dashboardWindowTitle: 'Painel',
@@ -89,7 +89,7 @@ const localizationStrings = {
     strAboutAuthor: 'Autor',
     strAboutThanks: 'Agradecimentos',
     strAboutNirvana1: 'Nirvana Barbell equipe de powerlifting',
-    strAboutNirvana2: '- por incentivar o desenvolvimento deste projeto e ajudar a testá-lo.'
+    strAboutNirvana2: ' - por ajudar a testar este projeto e prestar feedbacks valiosos.'
   },
 };
 
