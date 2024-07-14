@@ -41,6 +41,14 @@ More detailed instructions for setting up the hardware will be added soon.
 
 Once you have the desktop app running and the router set up, all you have to do is connect the router to your computer with an USB cable. The desktop app will then explain how to connect the referees' phones to the system and use the simple, intuitive web app to select their decisions for each lift.
 
+## Roadmap
+
+- [x] Fully working lights system with desktop app, ESP32 router and mobile webpage.
+- [x] Main timer for the competition, plus individual countdowns for informing the next attempts.
+- [ ] ESP8266 compatibility (so the router can be build either with an ESP32 or an ESP8266). See 'feature/esp8266-compatibility' branch.
+- [ ] Web Edition (no ESP32 or other hardware required, but internet connection required).
+- [ ] Add modes for weightlifting and for non-IPF powerlifting rulesets. 
+
 ## Author
 
 - Victor Begha - https://github.com/victorbegha/
