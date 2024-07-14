@@ -45,11 +45,13 @@ ipcMain.on('setConfigAndRestart', (event, config) => {
 /* --- SETTING CONFIG --- */
 
 config = getConfigFromFile();
-const SERIAL_BAUD_RATE = config.baudRate ? config.baudRate : 115200;
-const INTERVAL_UPDATE_TIMER = config.intervals.updateTimer;
-const INTERVAL_CHECK_SERIAL_CONNECTION = config.intervals.checkSerialConnection;
-const INTERVAL_PRINT_ATTEMPT_CHANGES = config.intervals.printAttemptChanges;
-const INTERVAL_CHECK_SHOW_LIGHTS = config.intervals.checkShowLights;
+const SERIAL_BAUD_RATE = config.baudRate ?? 115200;
+const INTERVAL_UPDATE_TIMER = config.intervals.updateTimer ?? 100;
+const INTERVAL_CHECK_SERIAL_CONNECTION = config.intervals.checkSerialConnection ?? 2500;
+const INTERVAL_CHECK_SERIAL_QUEUE = config.intervals.checkSerialQueue ?? 200;
+const INTERVAL_PRINT_ATTEMPT_CHANGES = config.intervals.printAttemptChanges ?? 200;
+const INTERVAL_CHECK_SHOW_LIGHTS = config.intervals.checkShowLights ?? 500;
+const INTERVAL_REQUEST_NETWORK_INFO = config.intervals.requestNetworkInfo ?? 1000;
 
 /* --- SERIAL PORT COMMUNICATION (for speaking to the router) --- */
 
@@ -85,7 +87,7 @@ function setupSerialPort() {
 
     // On first connection we always get the current state of referee decisions, and the network info
     requestStatus();
-    setTimeout(requestNetworkInfo, config.intervals.requestNetworkInfo);
+    setTimeout(requestNetworkInfo, INTERVAL_REQUEST_NETWORK_INFO);
 
     serialPort.on('data', function (data) {
       if (config.debugSerial) {
@@ -144,7 +146,7 @@ function setupSerialPort() {
     }
   }
 
-  setInterval(checkSerialMessages, config.intervals.checkSerialQueue);
+  setInterval(checkSerialMessages, INTERVAL_CHECK_SERIAL_QUEUE);
 }
 
 function handleSerialError(error) {
