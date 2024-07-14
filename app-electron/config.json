@@ -2,13 +2,15 @@
   "language": "en-us",
   "useSpecificComPort": false,
   "specificComPort": "COM6",
+  "debugSerial": true,
+  "baudRate": 115200,
   "ruleset": "ipf",
-  "debugSerial": false,
   "showMilliseconds": false,
   "defaultLiftTimer": 60000,
   "intervals": {
     "updateTimer": 100,
     "checkSerialConnection": 2500,
+    "checkSerialQueue": 200,
     "printAttemptChanges": 200,
     "checkShowLights": 500,
     "requestNetworkInfo": 1000

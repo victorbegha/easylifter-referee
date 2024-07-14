@@ -45,6 +45,7 @@ ipcMain.on('setConfigAndRestart', (event, config) => {
 /* --- SETTING CONFIG --- */
 
 config = getConfigFromFile();
+const SERIAL_BAUD_RATE = config.baudRate ? config.baudRate : 115200;
 const INTERVAL_UPDATE_TIMER = config.intervals.updateTimer;
 const INTERVAL_CHECK_SERIAL_CONNECTION = config.intervals.checkSerialConnection;
 const INTERVAL_PRINT_ATTEMPT_CHANGES = config.intervals.printAttemptChanges;
@@ -75,6 +76,8 @@ function tryDetectPort() {
   });
 }
 
+var queue = '';
+
 /* Sets up the listeners for serial communications */
 function setupSerialPort() {
   serialPort.on('open', function () {
@@ -89,50 +92,59 @@ function setupSerialPort() {
         console.log('Incoming serial data: ' + data);
       }
 
-      // Everything coming from the serial port must be wrapped between '|S|' and '|E|' to be valid. Examples:
-      // |S|err|Failed to setup mDNS|E|
-      // |S|msg|Setup complete|E|
-      // |S|l0001c1000r0110|E|
-      // Anything else should be considered garbage data.
-      const PATTERN = /\|S\|(?<message>.+?)\|E\|/i;
-      let found = data.toString().match(PATTERN);
-
-      if (found) {
-        let message = found.groups['message'];
-
-        // Errors coming from the router
-        if (message.includes('err|')) {
-          handleSerialError(message);
-        }
-        // Other messages coming from the router
-        else if (message.includes('msg|')) {
-          logSerialMessage(message);
-        }
-        // Receiving the network connection info (SSID, password, URL etc)
-        else if (message.includes('network|')) {
-          setNetworkConnectionInfo(message);
-        }
-        // Simplified timer controls from the chief referee
-        // Format: timer|rp|60000
-        else if (message.includes('timer|')) {
-          message = message.substring(6);
-          let command = message.substring(0, message.indexOf('|'));
-          let millis = message.substring(message.indexOf('|') + 1);
-          switch (command) {
-            case 'rp': // restart and play
-              startNewTimer(parseInt(millis));
-              playTimer(parseInt(millis));
-              break;
-          }
-        }
-        // Referee decisions (main communication)
-        // Format: l0000c0000r0000
-        else if (message.length == 15 && !lock) {
-          updateDecisions(message.split(''));
-        }
-      }
+      queue += data.toString();
     });
   });
+
+  function checkSerialMessages() {
+    // Everything coming from the serial port must be wrapped between '|S|' and '|E|' to be valid. Examples:
+    // |S|err|Failed to setup mDNS|E|
+    // |S|msg|Setup complete|E|
+    // |S|l0001c1000r0110|E|
+    // Anything else should be considered garbage data.
+
+    // Check if there's a complete message on the queue
+    const PATTERN = /\|S\|(?<message>.+?)\|E\|/i;
+    let found = queue.toString().match(PATTERN);
+
+    if (found) {
+      let message = found.groups['message'];
+      queue = queue.replace(found[0].toString(), '');
+
+      // Errors coming from the router
+      if (message.includes('err|')) {
+        handleSerialError(message);
+      }
+      // Other messages coming from the router
+      else if (message.includes('msg|')) {
+        logSerialMessage(message);
+      }
+      // Receiving the network connection info (SSID, password, URL etc)
+      else if (message.includes('network|')) {
+        setNetworkConnectionInfo(message);
+      }
+      // Simplified timer controls from the chief referee
+      // Format: timer|rp|60000
+      else if (message.includes('timer|')) {
+        message = message.substring(6);
+        let command = message.substring(0, message.indexOf('|'));
+        let millis = message.substring(message.indexOf('|') + 1);
+        switch (command) {
+          case 'rp': // restart and play
+            startNewTimer(parseInt(millis));
+            playTimer(parseInt(millis));
+            break;
+        }
+      }
+      // Referee decisions (main communication)
+      // Format: l0000c0000r0000
+      else if (message.length == 15 && !lock) {
+        updateDecisions(message.split(''));
+      }
+    }
+  }
+
+  setInterval(checkSerialMessages, config.intervals.checkSerialQueue);
 }
 
 function handleSerialError(error) {
@@ -166,7 +178,7 @@ async function checkSerialConnection() {
       console.log('Router connected');
       serialPort = new SerialPort({
         path: serialPortName,
-        baudRate: 115200,
+        baudRate: SERIAL_BAUD_RATE,
       });
       setupSerialPort();
     }
