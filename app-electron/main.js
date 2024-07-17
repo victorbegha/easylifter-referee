@@ -9,6 +9,7 @@ const { SerialPort } = require('serialport');
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
+const enums = require('./ui/enums.js');
 const utils = require('./utils.js');
 
 /* --- CONFIG FILE HANDLING --- */
@@ -52,6 +53,8 @@ const INTERVAL_CHECK_SHOW_LIGHTS = config.intervals.checkShowLights;
 
 /* --- SERIAL PORT COMMUNICATION (for speaking to the router) --- */
 
+const CONNECTION_STATUSES = enums.CONNECTION_STATUSES;
+
 var serialPortName = ''; // "COM4", "COM6" etc
 var serialPort = null; // SerialPort object
 
@@ -79,6 +82,7 @@ function tryDetectPort() {
 function setupSerialPort() {
   serialPort.on('open', function () {
     console.log('Serial connection with router is open');
+    informConnectionStatus(CONNECTION_STATUSES.CONNECTED);
 
     // On first connection we always get the current state of referee decisions, and the network info
     requestStatus();
@@ -161,9 +165,11 @@ async function checkSerialConnection() {
 
     if (serialPortName === '') {
       console.log('Router disconnected');
+      informConnectionStatus(CONNECTION_STATUSES.DISCONNECTED);
       serialPort = null;
     } else {
-      console.log('Router connected');
+      console.log('Router connecting');
+      informConnectionStatus(CONNECTION_STATUSES.CONNECTING);
       serialPort = new SerialPort({
         path: serialPortName,
         baudRate: 115200,
@@ -171,14 +177,12 @@ async function checkSerialConnection() {
       setupSerialPort();
     }
   }
+}
 
-  // We inform the dashboard of the current connection status
+// We inform the dashboard of the current connection status
+function informConnectionStatus(status) {
   try {
-    if (serialPort === null) {
-      dashboardWindow.webContents.send('connectionStatus', false);
-    } else {
-      dashboardWindow.webContents.send('connectionStatus', true);
-    }
+    dashboardWindow.webContents.send('connectionStatus', status);
   } catch (e) {}
 }
 
@@ -196,7 +200,6 @@ function requestNetworkInfo() {
 
 /* --- TIMER AND RELATED CONTROLS --- */
 
-const enums = require('./ui/enums.js');
 const TIMER_STATUSES = enums.TIMER_STATUSES;
 var currentTimerStatus = TIMER_STATUSES.STOPPED;
 var timerText = '00:00';

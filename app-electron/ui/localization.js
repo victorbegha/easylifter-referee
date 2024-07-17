@@ -11,6 +11,7 @@ const localizationStrings = {
     miniTimerWindowTitle: 'Timer',
 
     strRouterDisconnected: 'Router Disconnected',
+    strRouterConnecting: 'Router Connecting...',
     strRouterConnected: 'Router Connected',
     strNavDashboard: 'Dashboard',
     strNavConnection: 'Referee Connection',
@@ -54,6 +55,7 @@ const localizationStrings = {
     miniTimerWindowTitle: 'Timer',
 
     strRouterDisconnected: 'Roteador Desconectado',
+    strRouterConnecting: 'Roteador Conectando...',
     strRouterConnected: 'Roteador Conectado',
     strNavDashboard: 'Painel',
     strNavConnection: 'Conexão Árbitros',

@@ -11,4 +11,10 @@ const TIMER_STATUSES = {
   EXPIRED: 3,
 };
 
-module.exports = {TIMER_STATUSES};
+const CONNECTION_STATUSES = {
+  DISCONNECTED: 0,
+  CONNECTING: 1,
+  CONNECTED: 2
+};
+
+module.exports = {TIMER_STATUSES, CONNECTION_STATUSES};

@@ -26,15 +26,28 @@ timer.setTimer();
 
 /* --- ROUTER CONNECTION --- */
 
-ipcRenderer.on('connectionStatus', function (event, connected) {
-  if (connected) {
-    document.getElementById('connectionStatusCard').style.color = '#22A231';
-    document.getElementById('strRouterConnected').classList.remove('hidden');
-    document.getElementById('strRouterDisconnected').classList.add('hidden');
-  } else {
-    document.getElementById('connectionStatusCard').style.color = '#E41F1F';
-    document.getElementById('strRouterConnected').classList.add('hidden');
-    document.getElementById('strRouterDisconnected').classList.remove('hidden');
+const CONNECTION_STATUSES = require('./enums.js').CONNECTION_STATUSES;
+
+ipcRenderer.on('connectionStatus', function (event, connectionStatus) {
+  switch (connectionStatus) {
+    case CONNECTION_STATUSES.CONNECTED:
+      document.getElementById('connectionStatusCard').style.color = '#22A231';
+      document.getElementById('strRouterConnected').classList.remove('hidden');
+      document.getElementById('strRouterConnecting').classList.add('hidden');
+      document.getElementById('strRouterDisconnected').classList.add('hidden');
+      break;
+    case CONNECTION_STATUSES.CONNECTING:
+      document.getElementById('connectionStatusCard').style.color = '#e0da22';
+      document.getElementById('strRouterConnected').classList.add('hidden');
+      document.getElementById('strRouterConnecting').classList.remove('hidden');
+      document.getElementById('strRouterDisconnected').classList.add('hidden');
+      break;
+    case CONNECTION_STATUSES.DISCONNECTED:
+      document.getElementById('connectionStatusCard').style.color = '#E41F1F';
+      document.getElementById('strRouterConnected').classList.add('hidden');
+      document.getElementById('strRouterConnecting').classList.add('hidden');
+      document.getElementById('strRouterDisconnected').classList.remove('hidden');
+      break;
   }
 });
 
