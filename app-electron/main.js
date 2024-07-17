@@ -557,8 +557,13 @@ async function createWindows() {
   );
 
   // Listeners for UI controls
-  ipcMain.on('setFullScreen', (event, args) => {
-    isResultsFullScreen = !isResultsFullScreen;
+  ipcMain.on('setFullScreen', (event, forceLeave) => {
+    if (isResultsFullScreen || forceLeave) {
+      isResultsFullScreen = false;
+    }
+    else {
+      isResultsFullScreen = true;
+    }
     resultsWindow.setFullScreen(isResultsFullScreen);
   });
   ipcMain.on('showHideTimer', (event, args) => {
