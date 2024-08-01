@@ -81,6 +81,26 @@ function tryDetectPort() {
   });
 }
 
+/* When using a specific COM port (defined in config), checks if it is available, if not returns empty */
+function checkComPortAvailable(specifiedPort) {
+  return new Promise(async function (resolve, reject) {
+    await SerialPort.list().then((ports, err) => {
+      if (err) {
+        reject(err);
+        return;
+      } else {
+        availablePort = ports.filter((port) => port.path === specifiedPort);
+        if (availablePort.length === 1) {
+          resolve(availablePort[0].path);
+          return;
+        }
+        resolve('');
+        return;
+      }
+    });
+  });
+}
+
 var serialQueue = '';
 
 /* Reads the serial queue and acts on valid messages */
@@ -172,7 +192,7 @@ function logSerialMessage(message) {
 async function checkSerialConnection() {
   let newSerialPortName;
   if (config.useSpecificComPort) {
-    newSerialPortName = config.specificComPort;
+    newSerialPortName = await checkComPortAvailable(config.specificComPort);
   } else {
     newSerialPortName = await tryDetectPort();
   }
