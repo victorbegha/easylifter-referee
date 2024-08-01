@@ -4,13 +4,16 @@
   "specificComPort": "COM6",
   "ruleset": "ipf",
   "debugSerial": false,
+  "releaseMode": "",
   "showMilliseconds": false,
   "defaultLiftTimer": 60000,
   "intervals": {
-    "updateTimer": 100,
-    "checkSerialConnection": 2500,
-    "printAttemptChanges": 200,
+    "checkSerialConnection": 2000,
     "checkShowLights": 500,
-    "requestNetworkInfo": 1000
+    "printAttemptChanges": 200,
+    "requestNetworkInfo": 1000,
+    "timeForDecision": 750,
+    "timeShowingLights": 7000,
+    "updateTimer": 100
   }
 }

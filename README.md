@@ -7,7 +7,7 @@
 <img src="assets/BannerGit.png" alt="EasyLifter Referee - Open Source Software for Powerlifting - by Victor Begha" style="max-height: 150px" />
 </div>
 
-EasyLifter Referee is a free, open source system for powerlifting referees.
+EasyLifter Referee is an open source system for powerlifting referees.
 
 It allows referees to select decisions wirelessly from their phones, showing the results to the meet audience - both the 'white' or 'red' lights for 'good lift' or 'no lift', as well as the corresponding colored referee cards under IPF rules.
 

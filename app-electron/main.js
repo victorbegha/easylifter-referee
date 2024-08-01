@@ -66,7 +66,7 @@ function tryDetectPort() {
         return;
       } else {
         ports.forEach((port) => {
-          if (port.friendlyName.includes('CP210x')) {
+          if (port.friendlyName.includes('CP210x') || port.friendlyName.includes('CH340')) {
             resolve(port.path);
             return;
           }
@@ -368,8 +368,8 @@ function printAttemptChanges() {
 
 /* --- REFEREE LIGHTS --- */
 
-const TIME_SHOWING_LIGHTS = 7000;
-const TIME_FOR_DECISION = 750;
+const TIME_SHOWING_LIGHTS = config.intervals.timeShowingLights;
+const TIME_FOR_DECISION = config.intervals.timeForDecision;
 
 var lock = false;
 

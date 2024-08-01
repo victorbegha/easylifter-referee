@@ -9,12 +9,13 @@ Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - EasyLifter Referee</title>
-    <link href="assets/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/all.css" rel="stylesheet" />
-    <link href="assets/dashboard.css" rel="stylesheet" />
 
-    <script src="assets/bootstrap.bundle.min.js"></script>
-    <script src="assets/fontawesome.js"></script>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/all.css" rel="stylesheet" />
+    <link href="assets/css/dashboard.css" rel="stylesheet" />
+    <link href="assets/css/fontawesome-all.min.css" rel="stylesheet" />
+
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
     <br />
@@ -140,43 +141,58 @@ Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
           <div class="row">
             <div class="col-12">
               <div class="card text-center">
-                <p>
-                  <span id="strNetworkIntro">Before connecting a referee's phone to the system, ensure the router is connected to the computer's USB port.</span>
-                </p>
-                <div id="networkWarning">
-                  <p><span id="strNetworkWarning">To get connection instructions, connect the router to the computer.</span></p>
+                <div id="networkKitWarning">
+                  <p>
+                    <span id="strNetworkKitWarning1">Network info is only necessary if you need to connect a new device to the system. If you acquired the equipment kit, you should already have three fully configured phones.</span>
+                  </p>
+                  <p>
+                    <span id="strNetworkKitWarning2" style="color: red">Do not share the network password with anyone. Use this only when setting up a new smartphone for the system.</span>
+                  </p>
+                  <button class="btn btn-light" onclick="showNetworkInfo(true)">
+                    <span id="strShowNetworkInfo">I understand and wish to access network information</span>
+                  </button>
                 </div>
-                <div id="networkInstructions" class="hidden">
-                  <p>
-                    <span id="strNetworkWifi">1. In the phone, connect to the system's WiFi network:</span>
-                  </p>
-                  <div class="row">
-                    <div class="col-6 offset-3">
-                      <div class="input-group mb-3">
-                        <span id="strNetworkSsidLabel" class="input-group-text">Network:</span>
-                        <input readonly class="form-control" id="ssid" value="REFEREES" />
+                <div id="networkConfiguration" class="hidden">
+                  <div id="networkIntro">
+                    <p>
+                      <span id="strNetworkIntro">Before connecting a referee's phone to the system, ensure the EasyLifter router is connected to the computer's USB port.</span>
+                    </p>
+                  </div>
+                  <div id="networkWarning">
+                    <p><span id="strNetworkWarning" style="color: green">To get connection instructions, connect the EasyLifter router to the computer.</span></p>
+                  </div>
+                  <div id="networkInstructions" class="hidden">
+                    <p>
+                      <span id="strNetworkWifi">1. In the phone, connect to the system's WiFi network:</span>
+                    </p>
+                    <div class="row">
+                      <div class="col-6 offset-3">
+                        <div class="input-group mb-3">
+                          <span id="strNetworkSsidLabel" class="input-group-text">Network:</span>
+                          <input readonly class="form-control" id="ssid" value="REFEREES" />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-6 offset-3">
-                      <div class="input-group mb-3">
-                        <span id="strNetworkPasswordLabel" class="input-group-text">Password:</span>
-                        <input readonly class="form-control" id="password" type="password" value="password" />
-                        <span class="input-group-text" style="cursor: pointer" onclick="togglePassword(false)">
-                          <i class="fa fa-eye"></i>
-                        </span>
+                    <div class="row">
+                      <div class="col-6 offset-3">
+                        <div class="input-group mb-3">
+                          <span id="strNetworkPasswordLabel" class="input-group-text">Password:</span>
+                          <input readonly class="form-control" id="password" type="password" value="password" />
+                          <span class="input-group-text" style="cursor: pointer" onclick="togglePassword(false)">
+                            <i class="fa fa-eye"></i>
+                          </span>
+                        </div>
                       </div>
                     </div>
+                    <p>
+                      <span id="strNetworkStayConnected">2. Since this is a local network, a message like "This network has no internet access, remain connected?" will appear. Choose YES to stay connected. To avoid issues, disable the phone's mobile data usage (4g/5g).</span>
+                    </p>
+                    <p>
+                      <span id="strNetworkAddress1">3. Type, in the internet browser, the address "http://easylifter.local/" or</span>
+                      <span id="ipAddress">"http://192.168.4.1"</span>
+                      <span id="strNetworkAddress2">to access the system.</span>
+                    </p>
                   </div>
-                  <p>
-                    <span id="strNetworkStayConnected">2. Since this is a local network, a message like "This network has no internet access, remain connected?" will appear. Choose YES to stay connected. To avoid issues, disable the phone's mobile data usage (4g/5g).</span>
-                  </p>
-                  <p>
-                    <span id="strNetworkAddress1">3. Type, in the internet browser, the address "http://easylifter.local/" or</span>
-                    <span id="ipAddress">"http://192.168.4.1"</span>
-                    <span id="strNetworkAddress2">to access the system.</span>
-                  </p>
                 </div>
               </div>
             </div>
@@ -225,11 +241,9 @@ Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
           <div class="row">
             <div class="col-12">
               <div class="card text-center">
-                <h5>
-                  EasyLifter Referee - <span id="strVersion">Version</span> 1.0.0
-                </h5>
+                <h5>EasyLifter Referee - <span id="strVersion">Version</span> 1.1.0</h5>
                 <p>
-                  <span id="strAboutDescription">EasyLifter Referee is a free, open source software licenced under the GNU General Public License v3.</span>
+                  <span id="strAboutDescription">EasyLifter Referee is an open source software licenced under the GNU General Public License v3.</span>
                   <a href="javascript:void(0)" onclick="openExternalLink('https:\/\/github.com/victorbegha/easylifter-referee')">
                     <span id="strGithubProject">Learn more on the project's GitHub page.</span>
                   </a>

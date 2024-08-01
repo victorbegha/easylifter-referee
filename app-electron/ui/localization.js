@@ -25,6 +25,9 @@ const localizationStrings = {
     strToggleAttempts: 'Show / hide next attempts',
     strNextAttemptTitle: 'Time to inform next attempt:',
 
+    strNetworkKitWarning1: 'Network info is only necessary if you need to connect a new device to the system. If you acquired the equipment kit, you should already have three fully configured phones.',
+    strNetworkKitWarning2: 'Do not share the network password with anyone. Use this only when setting up a new smartphone for the system.',
+    strShowNetworkInfo: 'I understand and wish to access network information',
     strNetworkIntro: 'Before connecting a referee\'s phone to the system, ensure the EasyLifter router is connected to the computer\'s USB port.',
     strNetworkWarning: 'To get connection instructions, connect the EasyLifter router to the computer.',
     strNetworkWifi: '1. In the phone, connect to the system\'s WiFi network:',
@@ -42,7 +45,7 @@ const localizationStrings = {
     strSetAttemptChange: 'New attempt change',
 
     strVersion: 'Version',
-    strAboutDescription: 'EasyLifter Referee is a free, open source software licenced under the GNU General Public License v3.',
+    strAboutDescription: 'EasyLifter Referee is an open source software licenced under the GNU General Public License v3.',
     strGithubProject: 'Learn more on the project\'s GitHub page.',
     strAboutAuthor: 'Author',
     strAboutThanks: 'Special thanks',
@@ -69,6 +72,9 @@ const localizationStrings = {
     strToggleAttempts: 'Mostrar / ocultar próximas pedidas',
     strNextAttemptTitle: 'Tempo para informar próxima pedida:',
 
+    strNetworkKitWarning1: 'Os dados da rede são necessários somente se você precisa conectar um novo dispositivo ao sistema. Se você adquiriu o kit do equipamento, já deve possuir três celulares plenamente configurados.',
+    strNetworkKitWarning2: 'Não compartilhe a senha da rede com ninguém. Use isto apenas para configurar um novo smartphone para o sistema.',
+    strShowNetworkInfo: 'Eu compreendo e desejo acessar os dados da rede',
     strNetworkIntro: 'Antes de conectar o celular de um árbitro ao sistema, verifique que o roteador EasyLifter está conectado à porta USB do computador.',
     strNetworkWarning: 'Para obter as instruções de conexão, conecte o roteador EasyLifter ao computador.',
     strNetworkWifi: '1. No celular, conecte à rede WiFi do sistema:',
@@ -86,7 +92,7 @@ const localizationStrings = {
     strSetAttemptChange: 'Nova entrega de pedida',
 
     strVersion: 'Versão',
-    strAboutDescription: 'EasyLifter Referee é um software gratuito e de código aberto, licenciado sob a GNU General Public License v3.',
+    strAboutDescription: 'EasyLifter Referee é um software de código aberto, licenciado sob a GNU General Public License v3.',
     strGithubProject: 'Conheça mais na página GitHub do projeto.',
     strAboutAuthor: 'Autor',
     strAboutThanks: 'Agradecimentos',
