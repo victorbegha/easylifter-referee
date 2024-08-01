@@ -64,7 +64,6 @@ function generateInoCredentials() {
   });
 }
 
-
 function main() {
   let language = process.argv[2];
   if (!language) {
@@ -75,22 +74,22 @@ function main() {
     language = 'pt-br';
   }
 
-let board = process.argv[3];
-if (!board) {
-  board = 'ESP32';
-}
+  let board = process.argv[3];
+  if (!board) {
+    board = 'ESP32';
+  }
 
   console.log('Loading ssid and password from softApCredentials.json:');
   loadCredentials();
-  
+
   if (!credentials || !credentials.ssid || credentials.ssid == '' || !credentials.password || credentials.password == '') {
     console.log('Error: SSID and password must be in softApCredentials.json');
     return;
   }
-  
+
   console.log('Creating pages.h for language: ' + language);
   automatePages(language);
-  
+
   console.log('Generating EasyLifterRefereeESP32.ino with ssid and password from softApCredentials.json:');
   generateInoCredentials();
 }
