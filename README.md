@@ -45,8 +45,7 @@ Once you have the desktop app running and the router set up, all you have to do 
 
 - [x] Fully working lights system with desktop app, ESP32 router and mobile webpage.
 - [x] Main timer for the competition, plus individual countdowns for informing the next attempts.
-- [ ] ESP8266 compatibility (so the router can be build either with an ESP32 or an ESP8266). See 'feature/esp8266-compatibility' branch.
-- [ ] Web Edition (no ESP32 or other hardware required, but internet connection required).
+- [x] ESP8266 compatibility (so the router can be build either with an ESP32 or an ESP8266).
 - [ ] Add modes for weightlifting and for non-IPF powerlifting rulesets. 
 
 ## Author
