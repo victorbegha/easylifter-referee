@@ -224,11 +224,19 @@ Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
                       <span id="strAdvancedOptions">Show advanced options</span>
                     </button>
                     <div id="advancedOptions" class="hidden">
-                      <button class="btn btn-light" onclick="showDemo(true)"><span id="strShowDemoValid">Demo (valid)</span></button>
-                      <br />
-                      <button class="btn btn-light" onclick="showDemo(false)"><span id="strShowDemoInvalid">Demo (invalid)</span></button>
-                      <br />
-                      <button class="btn btn-light" onclick="setAttemptChangeTimer()"><span id="strSetAttemptChange">New attempt change</span></button>
+                      <div class="row">
+                        <div class="col-6">
+                          <button class="btn btn-light" onclick="showDemo(true)"><span id="strShowDemoValid">Demo (valid)</span></button>
+                        </div>
+                        <div class="col-6">
+                          <button class="btn btn-light" onclick="showDemo(false)"><span id="strShowDemoInvalid">Demo (invalid)</span></button>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6 offset-3">
+                          <button class="btn btn-light" onclick="setAttemptChangeTimer()"><span id="strSetAttemptChange">New attempt change</span></button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

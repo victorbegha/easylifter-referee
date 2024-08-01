@@ -1,4 +1,6 @@
 app-electron/node_modules
 router-esp32/EasyLifterRefereeESP32/EasyLifterRefereeESP32.ino
 router-esp32/EasyLifterRefereeESP32/pages.h
+router-esp32/EasyLifterRefereeESP8266/EasyLifterRefereeESP8266.h
+router-esp32/EasyLifterRefereeESP8266/pages.h
 tools/inoCodeGenerator/softApCredentials.json
