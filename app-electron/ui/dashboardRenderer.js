@@ -26,15 +26,28 @@ timer.setTimer();
 
 /* --- ROUTER CONNECTION --- */
 
-ipcRenderer.on('connectionStatus', function (event, connected) {
-  if (connected) {
-    document.getElementById('connectionStatusCard').style.color = '#22A231';
-    document.getElementById('strRouterConnected').classList.remove('hidden');
-    document.getElementById('strRouterDisconnected').classList.add('hidden');
-  } else {
-    document.getElementById('connectionStatusCard').style.color = '#E41F1F';
-    document.getElementById('strRouterConnected').classList.add('hidden');
-    document.getElementById('strRouterDisconnected').classList.remove('hidden');
+const CONNECTION_STATUSES = require('./enums.js').CONNECTION_STATUSES;
+
+ipcRenderer.on('connectionStatus', function (event, connectionStatus) {
+  switch (connectionStatus) {
+    case CONNECTION_STATUSES.CONNECTED:
+      document.getElementById('connectionStatusCard').style.color = '#22A231';
+      document.getElementById('strRouterConnected').classList.remove('hidden');
+      document.getElementById('strRouterConnecting').classList.add('hidden');
+      document.getElementById('strRouterDisconnected').classList.add('hidden');
+      break;
+    case CONNECTION_STATUSES.CONNECTING:
+      document.getElementById('connectionStatusCard').style.color = '#e0da22';
+      document.getElementById('strRouterConnected').classList.add('hidden');
+      document.getElementById('strRouterConnecting').classList.remove('hidden');
+      document.getElementById('strRouterDisconnected').classList.add('hidden');
+      break;
+    case CONNECTION_STATUSES.DISCONNECTED:
+      document.getElementById('connectionStatusCard').style.color = '#E41F1F';
+      document.getElementById('strRouterConnected').classList.add('hidden');
+      document.getElementById('strRouterConnecting').classList.add('hidden');
+      document.getElementById('strRouterDisconnected').classList.remove('hidden');
+      break;
   }
 });
 
@@ -52,7 +65,7 @@ function showHideAttempts() {
   ipcRenderer.send('showHideAttempts');
 }
 
-/* --- SETTINGS --- */
+/* --- NETWORK TAB --- */
 
 ipcRenderer.on('networkInfo', function (event, ipAddress, ssid, password) {
   document.getElementById('ipAddress').innerHTML = '"http://' + ipAddress + '"';
@@ -71,6 +84,20 @@ function togglePassword(forceHide) {
     element.type = 'text';
   }
 }
+
+function showNetworkInfo(show) {
+  // The 'kit' release version is used for when the full equipment kit is acquired, which comes with three
+  // pre-configured phones. In that version, a warning is shown about being careful with the network info
+  if (config.releaseMode !== 'kit' || show) {
+    document.getElementById('networkKitWarning').classList.add('hidden');
+    document.getElementById('networkConfiguration').classList.remove('hidden');
+  } else {
+    document.getElementById('networkKitWarning').classList.remove('hidden');
+    document.getElementById('networkConfiguration').classList.add('hidden');
+  }
+}
+
+/* --- SETTINGS --- */
 
 function saveSettingsRestart() {
   let language = config.language;

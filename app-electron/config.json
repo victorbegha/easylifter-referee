@@ -5,14 +5,17 @@
   "debugSerial": true,
   "baudRate": 115200,
   "ruleset": "ipf",
+  "releaseMode": "",
   "showMilliseconds": false,
   "defaultLiftTimer": 60000,
   "intervals": {
-    "updateTimer": 100,
-    "checkSerialConnection": 2500,
+    "checkSerialConnection": 2000,
+    "checkShowLights": 500,
     "checkSerialQueue": 200,
     "printAttemptChanges": 200,
-    "checkShowLights": 500,
-    "requestNetworkInfo": 1000
+    "requestNetworkInfo": 1000,
+    "timeForDecision": 750,
+    "timeShowingLights": 7000,
+    "updateTimer": 100
   }
 }

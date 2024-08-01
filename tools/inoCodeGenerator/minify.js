@@ -5,14 +5,15 @@ Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
 */
 const fs = require('fs');
 
-function minifyToHtml(htmlString, board) {
-  const base64favicon = fs.readFileSync('./base64logo.txt').toString();
+function minifyToHtml(htmlString, ssid, board) {
+    const base64favicon = fs.readFileSync('./base64logo.txt').toString();
 
   // TODO: update to handle single-line JavaScript comments
   htmlString = htmlString.replace(/[\r\n]+/g, ''); // line breaks
   htmlString = htmlString.replace(/\<\!\-\-.+\-\-\>/g, ''); // HTML comments
   htmlString = htmlString.replace(/\/\*.+?\*\//g, ''); // JavaScript comments
   htmlString = htmlString.replace(/[\s\t]+/g, ' '); // Spaces and tabs
+    htmlString = htmlString.replace('<<REFEREESNETWORK>>', ssid); // Replace network SSID
 
   if (board == 'ESP32') {
     // Insert base64 encoded favicon
@@ -32,11 +33,11 @@ function minifyToQuotedString(str) {
   return str;
 }
 
-function minifyFileByPath(path, board) {
-  var fileContents = fs.readFileSync(path).toString();
-  fileContents = minifyToHtml(fileContents, board);
-  fileContents = minifyToQuotedString(fileContents);
-  return fileContents;
+function minifyFileByPath(path, ssid, board) {
+    var fileContents = fs.readFileSync(path).toString();
+    fileContents = minifyToHtml(fileContents, ssid, board);
+    fileContents = minifyToQuotedString(fileContents);
+    return fileContents;
 }
 
 module.exports = { minifyToHtml, minifyToQuotedString, minifyFileByPath };

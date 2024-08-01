@@ -74,7 +74,7 @@ function setPendingPosition(decision, position) {
   if (decision.includes('1')) {
     document.getElementById(position + '-result').classList.add('pending-result');
   } else {
-    document.getElementById(position +'-result').classList.remove('pending-result');
+    document.getElementById(position + '-result').classList.remove('pending-result');
   }
 }
 
@@ -120,6 +120,19 @@ ipcRenderer.on('showHideAttempts', function (event, text) {
     document.getElementById('attemptChanges').classList.remove('hidden');
   } else {
     document.getElementById('attemptChanges').classList.add('hidden');
+  }
+});
+
+/* --- FULLSCREEN CONTROLS --- */
+
+document.body.addEventListener('keydown', function (e) {
+  if (e.key == 'Escape') {
+    let forceLeave = true;
+    ipcRenderer.send('setFullScreen', forceLeave);
+  }
+  else if (e.key == 'F11') {
+    e.preventDefault();
+    ipcRenderer.send('setFullScreen');
   }
 });
 

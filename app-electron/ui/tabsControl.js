@@ -9,9 +9,8 @@ function setActiveTab(tab, option) {
   });
   tab.classList.add('active');
 
-  // Auto hides the network password on the Network Connection tab if changing to another tab
   try {
-    togglePassword(true);
-  }
-  catch (e) {}
+    togglePassword(true); // Auto hides the network password on the Network Connection tab if changing to another tab.
+    showNetworkInfo(false); // Also hides the entire network info section on the Kit version.
+  } catch (e) {}
 }

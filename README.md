@@ -7,7 +7,7 @@
 <img src="assets/BannerGit.png" alt="EasyLifter Referee - Open Source Software for Powerlifting - by Victor Begha" style="max-height: 150px" />
 </div>
 
-EasyLifter Referee is a free, open source system for powerlifting referees.
+EasyLifter Referee is an open source system for powerlifting referees.
 
 It allows referees to select decisions wirelessly from their phones, showing the results to the meet audience - both the 'white' or 'red' lights for 'good lift' or 'no lift', as well as the corresponding colored referee cards under IPF rules.
 
@@ -40,6 +40,14 @@ For the router, all you need is an ESP32 NodeMCU module, which you can find for 
 More detailed instructions for setting up the hardware will be added soon.
 
 Once you have the desktop app running and the router set up, all you have to do is connect the router to your computer with an USB cable. The desktop app will then explain how to connect the referees' phones to the system and use the simple, intuitive web app to select their decisions for each lift.
+
+## Roadmap
+
+- [x] Fully working lights system with desktop app, ESP32 router and mobile webpage.
+- [x] Main timer for the competition, plus individual countdowns for informing the next attempts.
+- [ ] ESP8266 compatibility (so the router can be build either with an ESP32 or an ESP8266). See 'feature/esp8266-compatibility' branch.
+- [ ] Web Edition (no ESP32 or other hardware required, but internet connection required).
+- [ ] Add modes for weightlifting and for non-IPF powerlifting rulesets. 
 
 ## Author
 
