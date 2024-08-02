@@ -9,7 +9,7 @@ const minify = require('./minify.js');
 var credentials;
 var board;
 
-function automatePages(language, board) {
+function automatePages(language) {
   var pagesHeader = fs.readFileSync('../../router-esp32/pages_template.h').toString();
   pagesHeader = pagesHeader.replace('<<<MENUHTML>>>', minify.minifyFileByPath('../../router-esp32/pages/' + language + '/menu.html', credentials.ssid, board));
   pagesHeader = pagesHeader.replace('<<<REFEREEHTML>>>', minify.minifyFileByPath('../../router-esp32/pages/' + language + '/referee.html', credentials.ssid, board));
