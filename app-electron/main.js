@@ -47,12 +47,14 @@ ipcMain.on('setConfigAndRestart', (event, config) => {
 
 config = getConfigFromFile();
 const SERIAL_BAUD_RATE = config.baudRate ?? 115200;
-const INTERVAL_UPDATE_TIMER = config.intervals.updateTimer ?? 100;
-const INTERVAL_CHECK_SERIAL_CONNECTION = config.intervals.checkSerialConnection ?? 2500;
+const INTERVAL_CHECK_SERIAL_CONNECTION = config.intervals.checkSerialConnection ?? 2000;
+const INTERVAL_CHECK_SHOW_LIGHTS = config.intervals.checkShowLights ?? 500;
 const INTERVAL_CHECK_SERIAL_QUEUE = config.intervals.checkSerialQueue ?? 200;
 const INTERVAL_PRINT_ATTEMPT_CHANGES = config.intervals.printAttemptChanges ?? 200;
-const INTERVAL_CHECK_SHOW_LIGHTS = config.intervals.checkShowLights ?? 500;
 const INTERVAL_REQUEST_NETWORK_INFO = config.intervals.requestNetworkInfo ?? 1000;
+const TIME_FOR_DECISION = config.intervals.timeForDecision ?? 750;
+const TIME_SHOWING_LIGHTS = config.intervals.timeShowingLights ?? 7000;
+const INTERVAL_UPDATE_TIMER = config.intervals.updateTimer ?? 100;
 
 /* --- SERIAL PORT COMMUNICATION (for speaking to the router) --- */
 
@@ -406,9 +408,6 @@ function printAttemptChanges() {
 }
 
 /* --- REFEREE LIGHTS --- */
-
-const TIME_SHOWING_LIGHTS = config.intervals.timeShowingLights;
-const TIME_FOR_DECISION = config.intervals.timeForDecision;
 
 var lock = false;
 
