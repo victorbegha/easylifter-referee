@@ -7,6 +7,8 @@ const fs = require('fs');
 const minify = require('./minify.js');
 
 var credentials;
+var board;
+
 function automatePages(language, board) {
   var pagesHeader = fs.readFileSync('../../router-esp32/pages_template.h').toString();
   pagesHeader = pagesHeader.replace('<<<MENUHTML>>>', minify.minifyFileByPath('../../router-esp32/pages/' + language + '/menu.html', credentials.ssid, board));
@@ -74,7 +76,7 @@ function main() {
     language = 'pt-br';
   }
 
-  let board = process.argv[3];
+  board = process.argv[3];
   if (!board) {
     board = 'ESP32';
   }
