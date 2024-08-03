@@ -7,7 +7,7 @@ Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
 /* Font is included in the project since it may not be installed on all computers */
 @font-face {
     font-family: 'RobotoBlackLocal';
-    src: url('../assets/Roboto-Black.ttf');
+    src: url('../Roboto-Black.ttf');
 }
 
 /* Disable highlighting/selecting text across the app */
