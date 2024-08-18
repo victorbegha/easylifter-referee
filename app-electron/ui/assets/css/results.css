@@ -75,7 +75,7 @@ body {
 }
 .one-half {
     width: 40%;
-    font-size: 15vw; /* TODO: if SHOW_MILLISECONDS, use 10vw */
+    font-size: 15vw;
     display: flex;
     justify-content: center;
     flex-direction: column;

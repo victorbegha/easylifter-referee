@@ -319,13 +319,7 @@ function formatTimerText(remainingMillis) {
   let minutesDisplay = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
   let secondsDisplay = (date.getSeconds() < 10 ? '0' : '') + date.getSeconds();
 
-  let millisecondsDisplay = '';
-  if (config.showMilliseconds) {
-    let truncatedMillis = Math.floor(date.getMilliseconds() / 10);
-    millisecondsDisplay = '.' + ('00' + truncatedMillis).slice(-2);
-  }
-
-  return minutesDisplay + ':' + secondsDisplay + millisecondsDisplay;
+  return minutesDisplay + ':' + secondsDisplay;
 }
 
 function updateTimerStatus(status) {
