@@ -1,6 +1,6 @@
 {
   "name": "easylifter-referee",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Free referee lights and timing system for powerlifting",
   "main": "main.js",
   "scripts": {
