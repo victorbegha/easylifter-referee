@@ -15,6 +15,8 @@ Additionally, the system also features an easy-to-use, multi purpose timer - it'
 
 EasyLifter Referee requires no internet access, as many powerlifting meets are held in locations without good connections. Instead, it uses a cheap, widely available ESP32 board to generate its own WiFi network.
 
+More information is available on https://easyliftersoftware.com/
+
 ## Why
 
 I've seen a few ways referee lights have been implemented in powerlifting meets. The most common is probably with analog white and red lamps; it works, but it's not that pretty, it requires a lot of wiring, and it doesn't feature any way to display the colored referee cards (each of which represents specific rules), requiring the referee to physically raise up a plastic card to show that. Cumbersome.
@@ -27,7 +29,7 @@ On April 2024, I became a national powerlifting referee for my country's IPF aff
 
 EasyLifter Referee has two main components: a desktop app, and a router built with an ESP32 module.
 
-Installable binaries will soon be available for the desktop app. For the moment, you can install NodeJS (recommended version 18 or higher) and run `npm install` then `npm run start` on the 'app-electron' folder.
+You need to install NodeJS (recommended version 18 or higher) and run `npm install` then `npm run start` on the 'app-electron' folder.
 
 For the router, all you need is an ESP32 NodeMCU module, which you can find for cheap on many online stores. Afterwards, you will need to:
 
@@ -37,8 +39,6 @@ For the router, all you need is an ESP32 NodeMCU module, which you can find for 
 
 - Load the router code through the Arduino IDE.
 
-More detailed instructions for setting up the hardware will be added soon.
-
 Once you have the desktop app running and the router set up, all you have to do is connect the router to your computer with an USB cable. The desktop app will then explain how to connect the referees' phones to the system and use the simple, intuitive web app to select their decisions for each lift.
 
 ## Roadmap
@@ -46,8 +46,8 @@ Once you have the desktop app running and the router set up, all you have to do 
 - [x] Fully working lights system with desktop app, ESP32 router and mobile webpage.
 - [x] Main timer for the competition, plus individual countdowns for informing the next attempts.
 - [x] ESP8266 compatibility (so the router can be built either with an ESP32 or an ESP8266).
-- [ ] Add secondary timer for counting down to the limit for changing first attempts. 
-- [ ] Add modes for weightlifting and for non-IPF powerlifting rulesets. 
+
+Future features will be initially exclusive to the premium version and later added to the open source version.
 
 ## Author
 
