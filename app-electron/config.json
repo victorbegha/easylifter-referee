@@ -6,7 +6,6 @@
   "baudRate": 115200,
   "ruleset": "ipf",
   "releaseMode": "kit",
-  "showMilliseconds": false,
   "defaultLiftTimer": 60000,
   "intervals": {
     "checkSerialConnection": 2000,
