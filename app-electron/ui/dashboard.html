@@ -88,7 +88,7 @@ Licensed under GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
                   <div class="row">
                     <div class="col-xs-12 col-sm-8 col-lg-8">
                       <div class="input-group mb-3">
-                        <input id="timerInput" class="form-control" oninput="mascara(this)" onclick="clearInput(this)" onblur="validateTimer(this)" type="text" value="01:00" placeholder="00:00" />
+                        <input id="timerInput" class="form-control" oninput="maskTimerInput(this)" onclick="clearInput(this)" onblur="validateTimer(this)" type="text" value="01:00" placeholder="00:00" />
                         <div class="input-group-append">
                           <button id="playButton" onclick="timer.playTimer()" class="btn btn-light" type="button">
                             <i class="fas fa-play"></i>
